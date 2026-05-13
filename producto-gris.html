@@ -15,27 +15,32 @@
     min-height: 100vh;
     align-items: start; /* Alinea todo arriba para que no se mueva raro */
 }
-
 .gallery {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    max-width: 800px; /* Limitamos el ancho máximo de la galería */
+    max-width: 800px;
 }
-        }
-        .gallery img {
-            width: 100%;
-            height: 400px;
-            background: #111;
-            border-radius: 4px;
-            object-fit: contain; /* Esto mantiene la nitidez sin estirar */
-            padding: 20px;
-        }
-        .info-panel {
-            position: sticky;
-            top: 120px;
-            height: fit-content;
-            color: #c8b99b;
+
+.gallery img {
+    width: 100%;
+    max-width: 400px; /* Limita el ancho de cada foto */
+    height: auto;
+    background: #111;
+    border-radius: 4px;
+    object-fit: contain;
+    padding: 20px;
+    margin: 0 auto;
+    display: block;
+}
+
+.info-panel {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+    color: #c8b99b;
+    padding-left: 40px; /* Esto le da aire extra para que no choque con las fotos */
+}
         }
         .btn-comprar {
             display: block;
