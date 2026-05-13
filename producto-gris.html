@@ -6,18 +6,22 @@
     <title>The Figure — Gris | OBRA</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .product-page {
-            padding: 120px 5% 50px;
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 40px;
-            background: #0a0a0a;
-            min-height: 100vh;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+.product-page {
+    padding: 120px 5% 50px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Le damos un poco menos de espacio a la info para que no choquen */
+    gap: 80px; /* Aumentamos el espacio de separación entre la foto y el texto */
+    background: #0a0a0a;
+    min-height: 100vh;
+    align-items: start; /* Alinea todo arriba para que no se mueva raro */
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px; /* Limitamos el ancho máximo de la galería */
+}
         }
         .gallery img {
             width: 100%;
