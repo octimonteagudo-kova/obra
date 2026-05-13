@@ -41,26 +41,26 @@
     color: #c8b99b;
     padding-left: 40px; /* Esto le da aire extra para que no choque con las fotos */
 }
-        }
-        .btn-comprar {
-            display: block;
-            width: 100%;
-            padding: 20px;
-            background: #c8b99b;
-            color: #000;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 30px;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-        .btn-comprar:hover { background: #e2d5ba; }
-        @media (max-width: 900px) {
-            .product-page { grid-template-columns: 1fr; padding-top: 80px; }
-            .info-panel { position: static; }
-            .gallery img { height: 300px; }
-        }
+.btn-comprar {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: #c8b99b; /* El color beige original */
+    color: #000 !important; /* Forzamos el negro para que no se ponga violeta */
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-comprar:hover {
+    background: #e2d5ba; /* Color un poco más claro al pasar el mouse */
+    color: #000 !important;
+}
     </style>
 </head>
 <body>
