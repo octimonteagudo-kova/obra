@@ -147,8 +147,13 @@ position: relative;
     }
     .hero-h1 em { font-style: italic; color: #c8b99a; }
     .hero-sub {
-      font-size: 13px; line-height: 1.75; color: rgba(200,185,155,0.5);
-      letter-spacing: 0.04em; margin-bottom: 54px; max-width: 320px;
+     font-size: 13px; 
+      line-height: 1.75; 
+      color: rgba(200,185,155,0.5);
+      letter-spacing: 0.04em; 
+      margin-bottom: 54px; 
+      /* Eliminamos el max-width: 320px para que no se bloquee a la izquierda */
+      width: 100%;
     }
     .hero-cta {
       font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
