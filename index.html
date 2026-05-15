@@ -739,5 +739,25 @@
             createSmoke('smoke-2');
         });
     </script>
+    <style>
+.faq-item { border-top: 1px solid rgba(200,185,154,0.08); }
+.faq-item:last-child { border-bottom: 1px solid rgba(200,185,154,0.08); }
+.faq-question { width: 100%; background: none; border: none; color: #f0ede8; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; text-align: left; gap: 24px; }
+.faq-question:hover { color: #c8b99a; }
+.faq-icon { width: 26px; height: 26px; border: 1px solid rgba(200,185,154,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; color: #c8b99a; transition: transform 0.4s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.4s; }
+.faq-item.open .faq-answer { max-height: 200px; padding-bottom: 24px; }
+.faq-answer p { font-size: 13px; line-height: 1.9; color: rgba(240,237,232,0.4); }
+</style>
+
+<script>
+function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+}
+</script>
 </body>
 </html>
