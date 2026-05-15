@@ -20,6 +20,7 @@
     ::-webkit-scrollbar-track { background: #0a0a0a; }
     ::-webkit-scrollbar-thumb { background: rgba(200,185,155,0.2); }
 
+    /* ANIMACIONES ORIGINALES */
     @keyframes smokeRise {
       0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
       15%  { opacity: 0.5; }
@@ -72,9 +73,8 @@
       background: #d4c9b8; border: none; padding: 10px 24px;
       cursor: pointer; text-transform: uppercase; transition: background 0.3s;
     }
-    .nav-btn:hover { background: #e8ddd0; }
 
-    /* ── HERO ── */
+    /* ── HERO AJUSTADO ── */
     #hero {
       position: relative; 
       height: 100vh; 
@@ -82,8 +82,8 @@
       overflow: hidden; 
       background: #0a0a0a;
       display: flex; 
-      align-items: center;    /* CENTRADO VERTICAL */
-      justify-content: center; /* CENTRADO HORIZONTAL */
+      align-items: center;    /* Centra verticalmente el contenido */
+      justify-content: center; /* Centra horizontalmente */
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -96,15 +96,6 @@
       position: absolute; inset: 0; opacity: 0.55; mix-blend-mode: overlay; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     }
-    .hero-warmlight {
-      position: absolute; top: -12%; right: 8%;
-      width: 420px; height: 420px; pointer-events: none;
-      background: radial-gradient(circle, rgba(180,140,80,0.13) 0%, transparent 70%);
-    }
-    .hero-hline {
-      position: absolute; top: 50%; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(200,185,155,0.05) 30%, rgba(200,185,155,0.05) 70%, transparent 100%);
-    }
     .hero-text {
       position: relative;
       z-index: 10;
@@ -112,15 +103,11 @@
       width: 100%;
       animation: heroIn 1.5s ease forwards;
       padding: 0 24px;
-      margin-top: -30px; /* Ajuste para compensar visualmente la nav */
+      margin-top: -40px; /* Sube un poquito para compensar el peso visual de la nav */
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-    }
-    .hero-eyebrow {
-      font-size: 9px; letter-spacing: 0.42em;
-      color: rgba(200,185,155,0.45); text-transform: uppercase; margin-bottom: 30px;
     }
     .hero-h1 {
       font-family: 'Cormorant Garamond', serif;
@@ -131,7 +118,7 @@
     .hero-sub {
       font-size: 13px; line-height: 1.75;
       color: rgba(200,185,155,0.5);
-      letter-spacing: 0.04em; margin-bottom: 54px; width: 100%;
+      letter-spacing: 0.04em; margin-bottom: 54px;
     }
     .hero-cta {
       font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
@@ -139,35 +126,145 @@
       cursor: pointer; transition: all 0.4s ease;
       display: inline-flex; align-items: center; gap: 14px;
     }
-    .hero-cta:hover { background: #e8ddd0; letter-spacing: 0.38em; }
-    .hero-cta span { font-size: 15px; opacity: 0.55; }
-    .hero-vignette {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 220px; pointer-events: none;
-      background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
+    .hero-cta:hover { background: #e8ddd0; }
+
+    /* ── FIGURES ── */
+    #figures {
+      background: #0a0a0a;
+      padding: 140px 52px;
+      scroll-margin-top: 50px;
     }
-    .scroll-hint {
-      position: absolute; bottom: 30px; right: 48px;
-      display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.28;
+    .figures-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px; }
+    .figures-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 50px); font-weight: 300; }
+    .figures-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+    
+    .figure-card {
+      position: relative; aspect-ratio: 3/4; overflow: hidden; cursor: pointer;
+      border: 1px solid rgba(200,185,155,0.05);
+      background: #111009; text-decoration: none; display: block;
     }
-    .scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, transparent, #c8b99a);
-      animation: scrollPulse 2.2s ease infinite;
-    }
-    .scroll-word {
-      font-size: 7px; letter-spacing: 0.28em; color: #c8b99a;
-      text-transform: uppercase; writing-mode: vertical-rl;
-    }
+    .figure-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+    .figure-card:hover .figure-card-img { transform: scale(1.04); }
+    .figure-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,7,6,0.92) 0%, transparent 60%); }
+    .figure-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 30px; }
+    .figure-card-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; color: #f0ede8; }
+    .figure-card-price { display: flex; justify-content: space-between; margin-top: 16px; opacity: 0; transform: translateY(8px); transition: 0.4s; }
+    .figure-card:hover .figure-card-price { opacity: 1; transform: translateY(0); }
 
     /* ── PHILOSOPHY ── */
     #philosophy {
       background: #0d0c0b; padding: 140px 52px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
-    .section-tag {
-      font-size: 9px; letter-spacing: 0.42em;
-      color: rgba(200,185,155,0.38); text-transform: uppercase; margin-bottom: 40px;
+    .phil-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 66px); line-height: 1.08; }
+    .phil-body { font-size: 15px; line-height: 2.05; color: rgba(200,185,155,0.38); }
+
+    /* ── GALLERY ── */
+    #gallery { background: #080807; padding: 120px 52px; }
+    .gallery-grid-custom { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; max-width: 1200px; margin: auto; }
+    .gallery-left { position: relative; height: 620px; overflow: hidden; }
+    .gallery-banner { position: relative; grid-column: 1 / -1; height: 260px; overflow: hidden; }
+    .gallery-left img, .gallery-banner img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── FOOTER ── */
+    footer { background: #060605; padding: 52px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      #philosophy, .figures-grid, .gallery-grid-custom { grid-template-columns: 1fr; }
+      nav { padding: 20px; }
+      .nav-links { display: none; }
     }
-    .phil-h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 5vw, 66px); font-weight: 300;
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-logo">OBRA</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#philosophy">Concepto</a>
+    <a class="nav-link" href="#figures">Producto</a>
+    <a class="nav-link" href="#gallery">Espacios</a>
+    <button class="nav-btn" onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth', block:'center'})">COMPRAR</button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-text">
+    <p class="hero-eyebrow">Edición Limitada</p>
+    <h1 class="hero-h1">Una pieza<br /><em>para tu espacio.</em></h1>
+    <p class="hero-sub">No decoración. Identidad silenciosa.</p>
+    <button class="hero-cta" onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth', block:'center'})">Ver la pieza <span>→</span></button>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span class="scroll-word">scroll</span></div>
+</section>
+
+<section id="figures">
+  <div class="figures-header">
+    <div><p class="section-tag">La pieza</p><h2 class="figures-h2">The Figure</h2></div>
+    <p class="figures-sub">Portasahumerios de cerámica.<br>Stock limitado.</p>
+  </div>
+  <div class="figures-grid">
+    <a href="producto-gris.html" class="figure-card">
+      <img src="cuerpo%20completo.png" class="figure-card-img" alt="Gris">
+      <div class="figure-card-overlay"></div>
+      <div class="figure-card-info">
+        <p class="figure-card-name">The Figure — Gris</p>
+        <div class="figure-card-price"><span style="color:#c8b99a">$89.000</span><span style="font-size:9px">Ver detalles →</span></div>
+      </div>
+    </a>
+    <a href="producto-blanco.html" class="figure-card">
+      <img src="completo blanco.png" class="figure-card-img" alt="Blanco">
+      <div class="figure-card-overlay"></div>
+      <div class="figure-card-info">
+        <p class="figure-card-name">The Figure — Blanco</p>
+        <div class="figure-card-price"><span style="color:#c8b99a">$89.000</span><span style="font-size:9px">Ver detalles →</span></div>
+      </div>
+    </a>
+    <div class="figure-card">
+        <div id="smoke-negro" style="height:100%; position:relative;"></div>
+        <div class="figure-card-overlay" style="background:rgba(0,0,0,0.4)"></div>
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; letter-spacing:4px; font-size:10px">PRONTO</div>
+    </div>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div><p class="section-tag">Concepto</p><h2 class="phil-h2">Un objeto no ocupa <em>espacio.</em> Lo define.</h2></div>
+  <div><p class="phil-body">Un gesto silencioso de identidad artesanal.</p></div>
+</section>
+
+<section id="gallery">
+  <div class="gallery-grid-custom">
+    <div class="gallery-left"><img src="planta.png" alt="Espacio 1"></div>
+    <div class="gallery-left"><img src="de noche.png" alt="Espacio 2"></div>
+    <div class="gallery-banner"><img src="banner.png" alt="Banner"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">OBRA</div>
+  <p style="font-size:10px; opacity:0.3">© 2025 Obra Studio · Buenos Aires</p>
+</footer>
+
+<script>
+  // Script para Nav y Humo
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  function createSmoke(containerId, color) {
+    const container = document.getElementById(containerId);
+    if(!container) return;
+    for (let i = 0; i < 7; i++) {
+      const p = document.createElement('div');
+      p.className = 'smoke-particle';
+      p.style.cssText = `left:50%; bottom:${i*20}px; width:20px; height:20px; background:${color}; animation-delay:${i*0.8}s;`;
+      container.appendChild(p);
+    }
+  }
+  createSmoke('smoke-negro', 'rgba(200,185,160,0.1)');
+</script>
+</body>
+</html>
