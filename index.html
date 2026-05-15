@@ -48,7 +48,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 28px 48px;
       display: flex; justify-content: space-between; align-items: center;
-      transition: background 0.6s ease;
+      transition: background 0.6s ease, border-color 0.6s;
     }
     nav.scrolled {
       background: rgba(10,10,10,0.88);
@@ -67,8 +67,6 @@
       cursor: pointer; transition: color 0.3s; text-decoration: none;
     }
     .nav-link:hover { color: #f0ede8; }
-    
-    /* Botón Comprar unificado */
     .nav-btn {
       font-size: 9px; letter-spacing: 0.25em; color: #1a1a1a;
       background: #d4c9b8; border: none; padding: 10px 24px;
@@ -84,8 +82,8 @@
       overflow: hidden; 
       background: #0a0a0a;
       display: flex; 
-      align-items: center;    /* Centrado vertical real */
-      justify-content: center; /* Centrado horizontal real */
+      align-items: center;    /* CENTRADO VERTICAL */
+      justify-content: center; /* CENTRADO HORIZONTAL */
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -98,18 +96,31 @@
       position: absolute; inset: 0; opacity: 0.55; mix-blend-mode: overlay; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     }
+    .hero-warmlight {
+      position: absolute; top: -12%; right: 8%;
+      width: 420px; height: 420px; pointer-events: none;
+      background: radial-gradient(circle, rgba(180,140,80,0.13) 0%, transparent 70%);
+    }
+    .hero-hline {
+      position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(200,185,155,0.05) 30%, rgba(200,185,155,0.05) 70%, transparent 100%);
+    }
     .hero-text {
       position: relative;
       z-index: 10;
       max-width: 800px;
       width: 100%;
       animation: heroIn 1.5s ease forwards;
+      padding: 0 24px;
+      margin-top: -30px; /* Ajuste para compensar visualmente la nav */
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 0 24px;
-      margin-top: -40px; /* Ajuste fino para la barra de nav */
+    }
+    .hero-eyebrow {
+      font-size: 9px; letter-spacing: 0.42em;
+      color: rgba(200,185,155,0.45); text-transform: uppercase; margin-bottom: 30px;
     }
     .hero-h1 {
       font-family: 'Cormorant Garamond', serif;
@@ -120,7 +131,7 @@
     .hero-sub {
       font-size: 13px; line-height: 1.75;
       color: rgba(200,185,155,0.5);
-      letter-spacing: 0.04em; margin-bottom: 54px;
+      letter-spacing: 0.04em; margin-bottom: 54px; width: 100%;
     }
     .hero-cta {
       font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
@@ -129,37 +140,34 @@
       display: inline-flex; align-items: center; gap: 14px;
     }
     .hero-cta:hover { background: #e8ddd0; letter-spacing: 0.38em; }
-    
-    /* ── PRODUCT FIGURES ── */
-    #figures {
-      background: #0a0a0a;
-      padding: 100px 52px;
-      scroll-margin-top: 50px; /* Aire arriba al scrollear */
+    .hero-cta span { font-size: 15px; opacity: 0.55; }
+    .hero-vignette {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 220px; pointer-events: none;
+      background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
     }
-    .figures-header {
-      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px;
+    .scroll-hint {
+      position: absolute; bottom: 30px; right: 48px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.28;
     }
-    .figures-h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(30px, 4vw, 50px); font-weight: 300; color: #f0ede8;
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, transparent, #c8b99a);
+      animation: scrollPulse 2.2s ease infinite;
     }
-    .figures-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .figure-card {
-      position: relative; aspect-ratio: 3/4; overflow: hidden; cursor: pointer;
-      border: 1px solid rgba(200,185,155,0.05);
-      transition: border-color 0.4s; background: #111009;
-      text-decoration: none; display: block;
+    .scroll-word {
+      font-size: 7px; letter-spacing: 0.28em; color: #c8b99a;
+      text-transform: uppercase; writing-mode: vertical-rl;
     }
-    .figure-card:hover { border-color: rgba(200,185,155,0.14); }
-    .figure-card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,7,6,0.92) 0%, transparent 60%);
-    }
-    .figure-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 30px; }
-    .figure-card-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; color: #f0ede8; margin-bottom: 5px; }
-    .figure-card-sub { font-size: 9px; color: rgba(200,185,155,0.38); text-transform: uppercase; }
-    .figure-card-price { margin-top: 15px; display: flex; justify-content: space-between; opacity: 0; transform: translateY(10px); transition: 0.4s; }
-    .figure-card:hover .figure-card-price { opacity: 1; transform: translateY(0); }
 
-    /* ── RESTO DE ESTILOS ── */
-    #philosophy, #gallery, #quote, #cta, footer { padding: 10
+    /* ── PHILOSOPHY ── */
+    #philosophy {
+      background: #0d0c0b; padding: 140px 52px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .section-tag {
+      font-size: 9px; letter-spacing: 0.42em;
+      color: rgba(200,185,155,0.38); text-transform: uppercase; margin-bottom: 40px;
+    }
+    .phil-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 66px); font-weight: 300;
