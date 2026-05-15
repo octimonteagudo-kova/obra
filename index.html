@@ -88,7 +88,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 32px 52px;
+            padding: 32px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -97,7 +97,7 @@
         }
 
         nav.scrolled {
-            padding: 20px 52px;
+            padding: 18px 5%;
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -152,13 +152,14 @@
         /* ── HERO ── */
         #hero {
             position: relative;
-            height: 100vh;
+            min-height: 100vh;
+            height: auto;
             width: 100%;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-left: 8%;
+            padding: 120px 5% 60px 8%;
         }
 
         .hero-bg {
@@ -198,7 +199,7 @@
 
         .hero-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(48px, 8vw, 105px);
+            font-size: clamp(44px, 7vw, 105px);
             font-weight: 300;
             line-height: 0.92;
             letter-spacing: -0.02em;
@@ -278,11 +279,11 @@
 
         /* ── SECTION: PHILOSOPHY ── */
         #philosophy {
-            padding: 160px 52px;
+            padding: 140px 5%;
             background-color: var(--surface);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 100px;
+            gap: 80px;
         }
 
         .phil-label {
@@ -317,15 +318,14 @@
         }
 
         /* ── SECTION: PRODUCTS ── */
-#figures {
-    padding: 140px 0;
-    background-color: var(--bg);
-    /* AGREGÁ ESTA LÍNEA */
-    scroll-margin-top: -200px; 
-}
+        #figures {
+            padding: 140px 0;
+            background-color: var(--bg);
+            scroll-margin-top: 80px; 
+        }
 
         .section-header {
-            padding: 0 52px;
+            padding: 0 5%;
             margin-bottom: 80px;
             display: flex;
             justify-content: space-between;
@@ -422,14 +422,14 @@
 
         /* ── SECTION: LIFESTYLE ── */
         #gallery {
-            padding: 140px 52px;
+            padding: 140px 5%;
             background-color: var(--bg);
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            grid-template-rows: 600px 400px;
+            grid-auto-rows: minmax(300px, auto);
             gap: 20px;
         }
 
@@ -456,9 +456,25 @@
             opacity: 1;
         }
 
+        /* ── FAQ STYLES ── */
+        #faq {
+            padding: 100px 5%; 
+            background-color: #0a0a0a; 
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        .faq-item { border-top: 1px solid rgba(200,185,154,0.08); }
+        .faq-item:last-child { border-bottom: 1px solid rgba(200,185,154,0.08); }
+        .faq-question { width: 100%; background: none; border: none; color: #f0ede8; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; text-align: left; gap: 24px; }
+        .faq-question:hover { color: #c8b99a; }
+        .faq-icon { width: 26px; height: 26px; border: 1px solid rgba(200,185,154,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; color: #c8b99a; transition: transform 0.4s; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.4s; }
+        .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 24px; }
+        .faq-answer p { font-size: 13px; line-height: 1.9; color: rgba(240,237,232,0.4); }
+
         /* ── FOOTER ── */
         footer {
-            padding: 100px 52px 60px;
+            padding: 100px 5%;
             background-color: #060605;
             border-top: 1px solid rgba(255, 255, 255, 0.02);
         }
@@ -523,13 +539,87 @@
             letter-spacing: 0.1em;
         }
 
-        /* ── RESPONSIVE ── */
+        /* ── RESPONSIVE ADAPTABILITY ENGINE ── */
         @media (max-width: 1024px) {
-            #philosophy { grid-template-columns: 1fr; gap: 40px; }
-            .figures-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-            nav { padding: 24px; }
-            #hero { padding-left: 24px; }
+            nav, nav.scrolled {
+                padding: 16px 24px;
+            }
+            .nav-links {
+                gap: 24px;
+            }
+            #philosophy { 
+                grid-template-columns: 1fr; 
+                gap: 40px; 
+                padding: 80px 24px;
+            }
+            .phil-content {
+                padding-top: 0;
+            }
+            .figures-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+            }
+            .gallery-grid { 
+                grid-template-columns: 1fr; 
+                grid-auto-rows: 350px;
+            }
+            .gallery-item.large {
+                grid-row: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #hero {
+                padding-left: 24px;
+                padding-right: 24px;
+                justify-content: flex-end;
+                padding-bottom: 80px;
+            }
+            .hero-title {
+                font-size: 38px;
+                line-height: 1.1;
+            }
+            .scroll-indicator {
+                display: none;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 0 24px;
+                margin-bottom: 40px;
+            }
+            .section-header p {
+                text-align: left !important;
+            }
+            .figures-grid { 
+                grid-template-columns: 1fr; 
+            }
+            .figure-img-container {
+                padding: 40px;
+            }
+            .figure-info {
+                padding: 32px 24px;
+            }
+            #faq {
+                padding: 60px 24px;
+            }
+            footer {
+                padding: 60px 24px 40px;
+            }
+            .footer-top {
+                flex-direction: column;
+                gap: 48px;
+                margin-bottom: 48px;
+            }
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -553,11 +643,12 @@
         <div class="hero-content">
             <span class="hero-tag">Edición Inaugural</span>
             <h1 class="hero-title">Una pieza<br><em>para tu espacio.</em></h1>
-     <a href="javascript:void(0)" 
-   onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth', block:'center'})" 
-   class="hero-cta">
-   Ver la pieza <span>→</span>
-</a>
+            <a href="javascript:void(0)" 
+               onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth', block:'start'})" 
+               class="hero-cta">
+                Ver la pieza <span>→</span>
+            </a>
+        </div>
 
         <div class="scroll-indicator">
             <div class="scroll-line-box"></div>
@@ -586,7 +677,8 @@
         </div>
 
         <div class="figures-grid">
-<a href="producto-gris.html" class="figure-card">                <div class="figure-smoke-container" id="smoke-1"></div>
+            <a href="producto-gris.html" class="figure-card">
+                <div class="figure-smoke-container" id="smoke-1"></div>
                 <div class="figure-img-container">
                     <img src="cuerpo%20completo.png" alt="The Figure Gris">
                 </div>
@@ -600,7 +692,8 @@
                 </div>
             </a>
 
-<a href="producto-blanco.html" class="figure-card">                <div class="figure-smoke-container" id="smoke-2"></div>
+            <a href="producto-blanco.html" class="figure-card">
+                <div class="figure-smoke-container" id="smoke-2"></div>
                 <div class="figure-img-container">
                     <img src="completo blanco.png" alt="The Figure Blanco">
                 </div>
@@ -642,23 +735,33 @@
             </div>
         </div>
     </section>
-    <section id="faq" style="padding: 80px 52px; background-color: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.03);">
-    <span style="font-size: 9px; letter-spacing: 0.5em; color: #c8b99a; text-transform: uppercase; margin-bottom: 20px; display: block;">Preguntas frecuentes</span>
-    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin-bottom: 48px;">Lo que más nos preguntan</h2>
-    <div style="max-width: 800px;">
 
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿De qué material está hecha la figura?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Cerámica de alta temperatura con terminación vidriada. Proceso artesanal, cada pieza es única.</p></div></div>
-
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿El sahumerio está incluido?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Sí, viene con sahumerios incluidos. Compatible con cualquier sahumerio de barra estándar.</p></div></div>
-
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Cómo cuido la pieza?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Paño seco o ligeramente húmedo. Evitá sumergirla en agua. La ceniza se retira fácil con un trapo suave.</p></div></div>
-
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Hacen envíos a todo el país?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Sí. CABA y GBA en 24-48hs. Interior del país entre 3 y 7 días hábiles.</p></div></div>
-
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Cómo hago mi pedido?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Desde la web o por WhatsApp. Te acompañamos en todo el proceso y confirmamos el envío con seguimiento.</p></div></div>
-
-    </div>
-</section>
+    <section id="faq">
+        <span style="font-size: 9px; letter-spacing: 0.5em; color: #c8b99a; text-transform: uppercase; margin-bottom: 20px; display: block;">Preguntas frecuentes</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin-bottom: 48px;">Lo que más nos preguntan</h2>
+        <div style="max-width: 800px;">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">¿De qué material está hecha la figura?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Cerámica de alta temperatura con terminación vidriada. Proceso artesanal, cada pieza es única.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">¿El sahumerio está incluido?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Sí, viene con sahumerios incluidos. Compatible con cualquier sahumerio de barra estándar.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">¿Cómo cuido la pieza?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Paño seco o ligeramente húmedo. Evitá sumergirla en agua. La ceniza se retira fácil con un trapo suave.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">¿Hacen envíos a todo el país?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Sí. CABA y GBA en 24-48hs. Interior del país entre 3 y 7 días hábiles.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">¿Cómo hago mi pedido?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Desde la web o por WhatsApp. Te acompañamos en todo el proceso y confirmamos el envío con seguimiento.</p></div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="footer-top">
@@ -680,12 +783,13 @@
                     <ul>
                         <li><a href="#">Concepto</a></li>
                         <li><a href="#">Procesos</a></li>
-<li><a href="https://wa.me/549113230877?text=Hola!%20Vi%20OBRA%20y%20me%20interesa%20una%20pieza.%20%C2%BFPod%C3%A9s%20darme%20m%C3%A1s%20info%3F" target="_blank">Contacto</a></li>                    </ul>
+                        <li><a href="https://wa.me/549113230877?text=Hola!%20Vi%20OBRA%20y%20me%20interesa%20una%20pieza.%20%C2%BFPod%C3%A9s%20darme%20m%C3%A1s%20info%3F" target="_blank">Contacto</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">© 2025 OBRA STUDIO. BUENOS AIRES, ARGENTINA.</p>
+            <p class="copyright">© 2026 OBRA STUDIO. BUENOS AIRES, ARGENTINA.</p>
             <div class="social-links">
                 <a href="#" class="nav-link" style="font-size: 8px;">Instagram</a>
             </div>
@@ -712,9 +816,8 @@
                 const particle = document.createElement('div');
                 particle.className = 'smoke-particle';
                 
-                // Variación aleatoria
                 const size = Math.random() * 20 + 10;
-                const left = Math.random() * 40 + 30; // Centrado relativo
+                const left = Math.random() * 40 + 30; 
                 const duration = Math.random() * 3 + 4;
                 const delay = Math.random() * 2;
                 
@@ -726,38 +829,27 @@
                 
                 container.appendChild(particle);
                 
-                // Limpiar DOM
                 setTimeout(() => {
                     particle.remove();
                 }, duration * 1000 + 2000);
             }, 800);
         }
 
-        // Inicializar humo en las tarjetas de producto
+        // Inicializar humo solo en pantallas mayores a celulares para cuidar el rendimiento móvil
         window.addEventListener('DOMContentLoaded', () => {
-            createSmoke('smoke-1');
-            createSmoke('smoke-2');
+            if (window.innerWidth > 768) {
+                createSmoke('smoke-1');
+                createSmoke('smoke-2');
+            }
         });
-    </script>
-    <style>
-.faq-item { border-top: 1px solid rgba(200,185,154,0.08); }
-.faq-item:last-child { border-bottom: 1px solid rgba(200,185,154,0.08); }
-.faq-question { width: 100%; background: none; border: none; color: #f0ede8; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; text-align: left; gap: 24px; }
-.faq-question:hover { color: #c8b99a; }
-.faq-icon { width: 26px; height: 26px; border: 1px solid rgba(200,185,154,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; color: #c8b99a; transition: transform 0.4s; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.4s; }
-.faq-item.open .faq-answer { max-height: 200px; padding-bottom: 24px; }
-.faq-answer p { font-size: 13px; line-height: 1.9; color: rgba(240,237,232,0.4); }
-</style>
 
-<script>
-function toggleFaq(btn) {
-    const item = btn.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-}
-</script>
+        // FAQ INTERACTION SYSTEM
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+    </script>
 </body>
 </html>
