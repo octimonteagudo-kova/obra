@@ -201,7 +201,11 @@
     }
 
     /* ── PRODUCT FIGURES ── */
-    #figures { background: #0a0a0a; padding: 120px 52px; scroll-margin-top: 200px;}
+  #figures {
+    background: #0a0a0a;
+    padding: 60px 52px; /* Bajamos de 120px a 60px para que los muñecos estén más cerca del inicio de la sección */
+    scroll-margin-top: 80px; /* Esto ayuda a los navegadores modernos a calcular el frenado */
+}
     .figures-header {
       display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px;
     }
