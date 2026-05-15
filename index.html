@@ -149,7 +149,7 @@
             transform: translateY(-1px);
         }
 
-        /* ── HERO ── */
+        /* ── HERO (Computadora perfecta) ── */
         #hero {
             position: relative;
             height: 100vh;
@@ -209,15 +209,6 @@
         .hero-title em {
             font-style: italic;
             color: var(--accent);
-        }
-
-        .hero-desc {
-            font-size: 14px;
-            line-height: 1.8;
-            color: rgba(240, 237, 232, 0.5);
-            max-width: 420px;
-            margin-bottom: 48px;
-            letter-spacing: 0.02em;
         }
 
         .hero-cta {
@@ -539,122 +530,146 @@
             letter-spacing: 0.1em;
         }
 
-        /* ── CORRECCIÓN TOTAL DE RESPONSIVE (MÓVIL Y TABLET) ── */
+        /* ── RESPONSIVE TABLETS ── */
         @media (max-width: 1024px) {
-            nav {
-                padding: 20px 24px;
-            }
-            .nav-links {
-                gap: 20px;
-            }
-            #philosophy { 
-                grid-template-columns: 1fr; 
-                gap: 40px; 
-                padding: 80px 24px;
-            }
-            .phil-content {
-                padding-top: 0;
-            }
-            .figures-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-            }
-            .gallery-grid { 
-                grid-template-columns: 1fr; 
-                grid-auto-rows: 350px;
-            }
-            .gallery-item.large {
-                grid-row: auto;
-            }
+            nav { padding: 20px 24px; }
+            .nav-links { gap: 20px; }
+            #philosophy { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
+            .phil-content { padding-top: 0; }
+            .figures-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 350px; }
+            .gallery-item.large { grid-row: auto; }
         }
 
+        /* ── SOLUCIÓN DEFINITIVA PARA CELULARES (MÓVIL) ── */
         @media (max-width: 768px) {
-            /* REESTRUCTURACIÓN DEL MENÚ: Evita amontonamientos y cortes */
+            /* Menú perfectamente centrado y ordenado, sin cortarse */
             nav, nav.scrolled {
                 flex-direction: column;
-                gap: 16px;
-                padding: 16px 16px 12px 16px;
-                background: rgba(10, 10, 10, 0.95);
+                gap: 12px;
+                padding: 14px 16px 10px 16px;
+                background: rgba(10, 10, 10, 0.96);
+                backdrop-filter: blur(15px);
             }
             .nav-logo {
-                font-size: 20px;
+                font-size: 18px;
                 letter-spacing: 0.3em;
             }
             .nav-links {
                 width: 100%;
                 justify-content: center;
-                gap: 14px;
-                flex-wrap: wrap; /* Si la pantalla es muy chica, bajan ordenados */
+                gap: 16px;
             }
             .nav-link {
                 font-size: 9px;
-                letter-spacing: 0.15em;
+                letter-spacing: 0.12em;
             }
             .nav-btn {
-                padding: 6px 14px;
+                padding: 5px 12px;
                 font-size: 8px;
             }
 
-            /* CONTROL DEL ESPACIO GIGANTE EN EL HERO */
+            /* ACHICAR EL ESPACIO NEGRO DEL HERO */
             #hero {
-                padding-left: 24px;
-                padding-right: 24px;
-                justify-content: center; /* Centrado vertical perfecto en celulares */
-                padding-top: 100px; /* Compensa la altura del nuevo menú de dos filas */
-                padding-bottom: 40px;
+                height: auto;
+                min-height: 80vh; /* Ya no fuerza el 100% de la pantalla, reduciendo el vacío */
+                padding: 110px 24px 40px 24px; /* Relleno compacto */
+                justify-content: center;
             }
             .hero-content {
-                margin-top: 40px; /* Eleva visualmente el bloque de texto */
+                margin-top: 0;
             }
             .hero-title {
-                font-size: 38px;
-                line-height: 1.1;
+                font-size: 36px;
+                line-height: 1.15;
                 margin-bottom: 24px;
             }
             .hero-tag {
-                margin-bottom: 16px;
+                margin-bottom: 12px;
             }
             .scroll-indicator {
-                display: none; /* Quitamos ruido visual sobrante en móvil */
+                display: none;
             }
 
-            /* RESTO DE SECCIONES EN MÓVIL */
+            /* ELIMINAR ESPACIOS NEGROS EXCESIVOS ENTRE SECCIONES */
+            #philosophy {
+                padding: 50px 24px; /* Bajó de 140px a 50px para juntar el contenido */
+                gap: 20px;
+            }
+            .phil-label {
+                margin-bottom: 12px;
+            }
+            .phil-content {
+                margin-top: 0;
+            }
+            .phil-text {
+                margin-bottom: 20px;
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            /* SECCIÓN PRODUCTOS COMPACTA */
+            #figures {
+                padding: 50px 0; /* Espacio compacto */
+            }
             .section-header {
+                padding: 0 24px;
+                margin-bottom: 32px;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 16px;
-                padding: 0 24px;
-                margin-bottom: 40px;
+                gap: 12px;
             }
             .section-header p {
                 text-align: left !important;
+                max-width: 100%;
             }
-            .figures-grid { 
-                grid-template-columns: 1fr; 
+            .figures-grid {
+                grid-template-columns: 1fr; /* Un producto debajo del otro */
+                gap: 1px;
+            }
+            .figure-card {
+                aspect-ratio: auto; /* Evita que la tarjeta se estire de más verticalmente */
             }
             .figure-img-container {
-                padding: 40px;
+                padding: 30px;
+                height: 280px; /* Tamaño controlado para la foto del producto */
             }
             .figure-info {
-                padding: 32px 24px;
+                padding: 24px;
+            }
+
+            /* GALERÍA Y PREGUNTAS FRECUENTES */
+            #gallery {
+                padding: 40px 24px;
+            }
+            .gallery-grid {
+                gap: 12px;
+                grid-auto-rows: 250px; /* Fotos más proporcionadas en vertical */
             }
             #faq {
-                padding: 60px 24px;
+                padding: 50px 24px;
             }
+            .faq-question {
+                font-size: 16px;
+                padding: 18px 0;
+            }
+
+            /* PIE DE PÁGINA */
             footer {
-                padding: 60px 24px 40px;
+                padding: 50px 24px 30px;
             }
             .footer-top {
                 flex-direction: column;
-                gap: 48px;
-                margin-bottom: 48px;
+                gap: 32px;
+                margin-bottom: 40px;
             }
             .footer-links {
                 grid-template-columns: 1fr;
-                gap: 32px;
+                gap: 24px;
             }
             .footer-bottom {
                 flex-direction: column;
-                gap: 20px;
+                gap: 16px;
                 align-items: flex-start;
             }
         }
