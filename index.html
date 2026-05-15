@@ -103,7 +103,8 @@
 .hero-text {
   position: relative;
   z-index: 10;
-  padding: 0 52px 25vh; /* Cambiamos 88px por 25vh para subirlo bastante */
+  /* Bajamos el padding de 88px a 40px para que el bloque baje */
+  padding: 0 52px 40px; 
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
@@ -112,8 +113,6 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* Eliminamos el align-items: flex-end del padre si es necesario, 
-     pero con el padding-bottom (25vh) ya lo empujas hacia arriba */
 }
     .hero-eyebrow {
       font-size: 9px; letter-spacing: 0.42em;
