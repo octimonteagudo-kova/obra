@@ -77,12 +77,15 @@
     /* ── HERO ── */
 #hero {
   position: relative; 
-  height: 85vh; /* Bajamos de 100 a 85 para que la página sea más compacta */
-  min-height: 600px;
+  height: 100vh; 
+  min-height: 700px;
   overflow: hidden; 
   background: #0a0a0a;
+  
+  /* CAMBIOS AQUÍ */
   display: flex; 
-  align-items: center; /* Cambiamos flex-end por center para mejor control */
+  align-items: center;    /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
 }
     .hero-bg {
       position: absolute; inset: 0;
@@ -107,11 +110,17 @@
 .hero-text {
   position: relative;
   z-index: 10;
-  padding: 0 52px 180px; /* Reducimos el padding inferior */
   max-width: 800px;
-  margin: -60px auto 0;  /* Agregamos un margen superior negativo para subirlo */
   width: 100%;
-  /* ... resto del código ... */
+  animation: heroIn 1.5s ease forwards;
+  
+  /* CAMBIOS AQUÍ */
+  padding: 0 24px;   /* Quitamos el padding-bottom grande para que no lo empuje hacia arriba */
+  margin: 0 auto;    /* Centra el bloque de texto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
     .hero-eyebrow {
       font-size: 9px; letter-spacing: 0.42em;
