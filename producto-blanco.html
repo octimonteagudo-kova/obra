@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Figure — Blanco | OBRA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+.product-page {
+    padding: 120px 5% 50px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    background: #0a0a0a;
+    min-height: 100vh;
+    align-items: start;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+}
+.gallery img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    background: #111;
+    border-radius: 4px;
+    object-fit: contain;
+    padding: 20px;
+    margin: 0 auto;
+    display: block;
+}
+.info-panel {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+    color: #c8b99b;
+    padding-left: 40px;
+}
+.btn-comprar {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: #c8b99b;
+    color: #000 !important;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.btn-comprar:hover {
+    background: #e2d5ba;
+    color: #000 !important;
+}
+    </style>
+</head>
+<body>
+    <div class="product-page">
+        <div class="gallery">
+            <img src="completo_blanco.png" alt="Frente">
+            <img src="costado_blanca.png" alt="Costado">
+            <img src="espalda_blanca.png" alt="Espalda">
+            <img src="base_blanca.png" alt="Base">
+        </div>
+        <div class="info-panel">
+            <a href="index.html" style="color: rgba(200,185,155,0.5); text-decoration: none; font-size: 12px; letter-spacing: 1px;">← VOLVER AL CATÁLOGO</a>
+            <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 48px; margin: 20px 0 10px; font-weight: 300;">The Figure</h1>
+            <p style="letter-spacing: 3px; opacity: 0.6; font-size: 11px;">CERÁMICA · EDICIÓN I · BLANCO</p>
+            <p style="font-size: 26px; margin: 30px 0; font-family: 'Cormorant Garamond', serif;">$89.000</p>
+            <p style="line-height: 1.8; opacity: 0.9; font-size: 15px; font-weight: 300;">
+                Pieza escultórica artesanal diseñada como portasahumerios. Su acabado en cerámica blanca vidriada aporta una pureza luminosa que contrasta con el flujo oscuro del humo sobre la figura.
+            </p>
+            <a href="https://wa.me/5491132390877" class="btn-comprar">COMPRAR PIEZA</a>
+        </div>
+    </div>
+</body>
+</html>
