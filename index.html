@@ -100,19 +100,21 @@
       position: absolute; top: 50%; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent 0%, rgba(200,185,155,0.05) 30%, rgba(200,185,155,0.05) 70%, transparent 100%);
     }
-    .hero-text {
-      position: relative;
-      z-index: 10;
-      padding: 0 52px 88px;
-      max-width: 800px;
-      margin: 0 auto;
-      width: 100%;
-      animation: heroIn 1.5s ease forwards;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+.hero-text {
+  position: relative;
+  z-index: 10;
+  padding: 0 52px 25vh; /* Cambiamos 88px por 25vh para subirlo bastante */
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  animation: heroIn 1.5s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Eliminamos el align-items: flex-end del padre si es necesario, 
+     pero con el padding-bottom (25vh) ya lo empujas hacia arriba */
+}
     .hero-eyebrow {
       font-size: 9px; letter-spacing: 0.42em;
       color: rgba(200,185,155,0.45); text-transform: uppercase; margin-bottom: 30px;
@@ -430,8 +432,7 @@
     <a class="nav-link" href="#philosophy">Concepto</a>
     <a class="nav-link" href="#figures">Producto</a>
     <a class="nav-link" href="#gallery">Espacios</a>
-    <button class="nav-btn" onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth'})">Comprar</button>
-  </div>
+<button class="nav-btn" onclick="window.scrollTo({top: document.getElementById('figures').offsetTop - 100, behavior: 'smooth'})">Comprar</button>  </div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -447,8 +448,7 @@
       <em>para tu espacio.</em>
     </h1>
     <p class="hero-sub">Objetos que definen ambientes.</p>
-<button class="hero-cta" onclick="window.scrollTo({top: document.getElementById('figures').offsetTop + 140, behavior: 'smooth'})">
-  Ver la pieza <span>→</span>
+<button class="cta-btn" ... onclick="window.scrollTo({top: document.getElementById('figures').offsetTop - 100, behavior: 'smooth'})">Comprá ahora</button>  Ver la pieza <span>→</span>
 </button>
   </div>
   <div class="hero-vignette"></div>
