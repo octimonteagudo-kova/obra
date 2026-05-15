@@ -1,270 +1,725 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OBRA — Objetos de diseño</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: #0a0a0a;
-      -webkit-font-smoothing: antialiased;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #f0ede8;
-    }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: rgba(200,185,155,0.2); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBRA — Objetos de diseño</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #0d0c0b;
+            --text: #f0ede8;
+            --accent: #c8b99a;
+            --accent-muted: rgba(200, 185, 154, 0.3);
+            --beige-btn: #d4c9b8;
+        }
 
-    /* ANIMACIONES ORIGINALES */
-    @keyframes smokeRise {
-      0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-      15%  { opacity: 0.5; }
-      60%  { transform: translateY(-90px) translateX(10px) scale(3); opacity: 0.25; }
-      100% { transform: translateY(-180px) translateX(-6px) scale(5); opacity: 0; }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 0.7; transform: scaleY(1.1); }
-    }
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .smoke-particle {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(10px);
-      animation: smokeRise 6s ease-out infinite;
-      pointer-events: none;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 28px 48px;
-      display: flex; justify-content: space-between; align-items: center;
-      transition: background 0.6s ease, border-color 0.6s;
-    }
-    nav.scrolled {
-      background: rgba(10,10,10,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 300;
-      letter-spacing: 0.38em; color: #f0ede8; text-transform: uppercase;
-    }
-    .nav-links { display: flex; gap: 40px; align-items: center; }
-    .nav-link {
-      font-size: 10px; letter-spacing: 0.2em;
-      color: rgba(240,237,232,0.45); text-transform: uppercase;
-      cursor: pointer; transition: color 0.3s; text-decoration: none;
-    }
-    .nav-link:hover { color: #f0ede8; }
-    .nav-btn {
-      font-size: 9px; letter-spacing: 0.25em; color: #1a1a1a;
-      background: #d4c9b8; border: none; padding: 10px 24px;
-      cursor: pointer; text-transform: uppercase; transition: background 0.3s;
-    }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-    /* ── HERO AJUSTADO ── */
-    #hero {
-      position: relative; 
-      height: 100vh; 
-      min-height: 700px;
-      overflow: hidden; 
-      background: #0a0a0a;
-      display: flex; 
-      align-items: center;    /* Centra verticalmente el contenido */
-      justify-content: center; /* Centra horizontalmente */
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 65% 75% at 68% 38%, rgba(80,65,50,0.38) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 50% at 28% 62%, rgba(50,45,38,0.22) 0%, transparent 60%),
-        linear-gradient(160deg, #0f0e0c 0%, #1a1714 40%, #0d0c0b 100%);
-    }
-    .hero-grain {
-      position: absolute; inset: 0; opacity: 0.55; mix-blend-mode: overlay; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    }
-    .hero-text {
-      position: relative;
-      z-index: 10;
-      max-width: 800px;
-      width: 100%;
-      animation: heroIn 1.5s ease forwards;
-      padding: 0 24px;
-      margin-top: -40px; /* Sube un poquito para compensar el peso visual de la nav */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .hero-h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(44px, 7.5vw, 90px); font-weight: 300;
-      line-height: 0.98; color: #f0ede8; letter-spacing: -0.01em; margin-bottom: 30px;
-    }
-    .hero-h1 em { font-style: italic; color: #c8b99a; }
-    .hero-sub {
-      font-size: 13px; line-height: 1.75;
-      color: rgba(200,185,155,0.5);
-      letter-spacing: 0.04em; margin-bottom: 54px;
-    }
-    .hero-cta {
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: #1a1714; background: #d4c9b8; border: none; padding: 16px 42px;
-      cursor: pointer; transition: all 0.4s ease;
-      display: inline-flex; align-items: center; gap: 14px;
-    }
-    .hero-cta:hover { background: #e8ddd0; }
+        /* ── CUSTOM SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(200, 185, 154, 0.15); }
 
-    /* ── FIGURES ── */
-    #figures {
-      background: #0a0a0a;
-      padding: 140px 52px;
-      scroll-margin-top: 50px;
-    }
-    .figures-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px; }
-    .figures-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 50px); font-weight: 300; }
-    .figures-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-    
-    .figure-card {
-      position: relative; aspect-ratio: 3/4; overflow: hidden; cursor: pointer;
-      border: 1px solid rgba(200,185,155,0.05);
-      background: #111009; text-decoration: none; display: block;
-    }
-    .figure-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
-    .figure-card:hover .figure-card-img { transform: scale(1.04); }
-    .figure-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,7,6,0.92) 0%, transparent 60%); }
-    .figure-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 30px; }
-    .figure-card-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; color: #f0ede8; }
-    .figure-card-price { display: flex; justify-content: space-between; margin-top: 16px; opacity: 0; transform: translateY(8px); transition: 0.4s; }
-    .figure-card:hover .figure-card-price { opacity: 1; transform: translateY(0); }
+        /* ── ANIMATIONS ── */
+        @keyframes smokeRise {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+            15% { opacity: 0.5; }
+            40% { transform: translateY(-60px) translateX(12px) scale(2.5); opacity: 0.3; }
+            100% { transform: translateY(-160px) translateX(-8px) scale(5); opacity: 0; }
+        }
 
-    /* ── PHILOSOPHY ── */
-    #philosophy {
-      background: #0d0c0b; padding: 140px 52px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    }
-    .phil-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 66px); line-height: 1.08; }
-    .phil-body { font-size: 15px; line-height: 2.05; color: rgba(200,185,155,0.38); }
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            30% { transform: translate(3%, -15%); }
+            50% { transform: translate(12%, 9%); }
+            70% { transform: translate(-10%, 10%); }
+            90% { transform: translate(15%, -5%); }
+        }
 
-    /* ── GALLERY ── */
-    #gallery { background: #080807; padding: 120px 52px; }
-    .gallery-grid-custom { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; max-width: 1200px; margin: auto; }
-    .gallery-left { position: relative; height: 620px; overflow: hidden; }
-    .gallery-banner { position: relative; grid-column: 1 / -1; height: 260px; overflow: hidden; }
-    .gallery-left img, .gallery-banner img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes heroFade {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    /* ── FOOTER ── */
-    footer { background: #060605; padding: 52px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; }
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            51% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
 
-    @media (max-width: 768px) {
-      #philosophy, .figures-grid, .gallery-grid-custom { grid-template-columns: 1fr; }
-      nav { padding: 20px; }
-      .nav-links { display: none; }
-    }
-  </style>
+        /* ── GRAIN OVERLAY ── */
+        .grain {
+            position: fixed;
+            top: -150%;
+            left: -150%;
+            width: 300%;
+            height: 300%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            animation: grain 8s steps(10) infinite;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ── NAVIGATION ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 32px 52px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        nav.scrolled {
+            padding: 20px 52px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            color: var(--text);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            color: rgba(240, 237, 232, 0.4);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.4s;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .nav-btn {
+            background: var(--beige-btn);
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 24px;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .nav-btn:hover {
+            background: #e5ddd1;
+            transform: translateY(-1px);
+        }
+
+        /* ── HERO ── */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 8%;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 70% 30%, rgba(50, 45, 40, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 20% 70%, rgba(30, 30, 30, 0.3) 0%, transparent 40%),
+                #0a0a0a;
+            z-index: -1;
+        }
+
+        .hero-light {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200, 185, 154, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: heroFade 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-tag {
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 8vw, 105px);
+            font-weight: 300;
+            line-height: 0.92;
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(240, 237, 232, 0.5);
+            max-width: 420px;
+            margin-bottom: 48px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            background: none;
+            border: 1px solid rgba(200, 185, 154, 0.2);
+            padding: 18px 36px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            transition: all 0.4s;
+        }
+
+        .hero-cta:hover {
+            background: rgba(200, 185, 154, 0.05);
+            border-color: rgba(200, 185, 154, 0.5);
+        }
+
+        /* ── SCROLL INDICATOR ── */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 48px;
+            left: 52px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .scroll-line-box {
+            width: 1px;
+            height: 60px;
+            background: rgba(200, 185, 154, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            animation: scrollLine 2.5s infinite;
+        }
+
+        .scroll-text {
+            font-size: 8px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(200, 185, 154, 0.4);
+            writing-mode: vertical-lr;
+        }
+
+        /* ── SECTION: PHILOSOPHY ── */
+        #philosophy {
+            padding: 160px 52px;
+            background-color: var(--surface);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .phil-label {
+            font-size: 9px;
+            letter-spacing: 0.5em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .phil-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(32px, 4vw, 56px);
+            line-height: 1.1;
+            font-weight: 300;
+        }
+
+        .phil-title em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .phil-content {
+            padding-top: 60px;
+        }
+
+        .phil-text {
+            font-size: 16px;
+            line-height: 2;
+            color: rgba(240, 237, 232, 0.4);
+            margin-bottom: 40px;
+        }
+
+        /* ── SECTION: PRODUCTS ── */
+        #figures {
+            padding: 140px 0;
+            background-color: var(--bg);
+        }
+
+        .section-header {
+            padding: 0 52px;
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .figures-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .figure-card {
+            position: relative;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            background-color: #0d0c0b;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .figure-img-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .figure-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+        }
+
+        .figure-card:hover img {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        .figure-info {
+            padding: 40px;
+            background: linear-gradient(to top, #0a0a0a, transparent);
+        }
+
+        .figure-category {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .figure-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text);
+        }
+
+        .figure-price {
+            margin-top: 16px;
+            font-size: 14px;
+            color: rgba(240, 237, 232, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .figure-smoke-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .smoke-particle {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(200, 185, 154, 0.08);
+            border-radius: 50%;
+            filter: blur(12px);
+            animation: smokeRise 5s linear infinite;
+            opacity: 0;
+        }
+
+        /* ── SECTION: LIFESTYLE ── */
+        #gallery {
+            padding: 140px 52px;
+            background-color: var(--bg);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            grid-template-rows: 600px 400px;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--surface);
+        }
+
+        .gallery-item.large {
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.8;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 100px 52px 60px;
+            background-color: #060605;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 80px;
+        }
+
+        .footer-logo-box .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            letter-spacing: 0.4em;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px;
+        }
+
+        .footer-col h4 {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul a {
+            font-size: 12px;
+            color: rgba(240, 237, 232, 0.4);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--text);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            font-size: 10px;
+            color: rgba(240, 237, 232, 0.2);
+            letter-spacing: 0.1em;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            #philosophy { grid-template-columns: 1fr; gap: 40px; }
+            .figures-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            nav { padding: 24px; }
+            #hero { padding-left: 24px; }
+        }
+    </style>
 </head>
 <body>
 
-<nav id="main-nav">
-  <div class="nav-logo">OBRA</div>
-  <div class="nav-links">
-    <a class="nav-link" href="#philosophy">Concepto</a>
-    <a class="nav-link" href="#figures">Producto</a>
-    <a class="nav-link" href="#gallery">Espacios</a>
-    <button class="nav-btn" onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth', block:'center'})">COMPRAR</button>
-  </div>
-</nav>
+    <div class="grain"></div>
 
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-text">
-    <p class="hero-eyebrow">Edición Limitada</p>
-    <h1 class="hero-h1">Una pieza<br /><em>para tu espacio.</em></h1>
-    <p class="hero-sub">No decoración. Identidad silenciosa.</p>
-    <button class="hero-cta" onclick="document.getElementById('figures').scrollIntoView({behavior:'smooth', block:'center'})">Ver la pieza <span>→</span></button>
-  </div>
-  <div class="scroll-hint"><div class="scroll-line"></div><span class="scroll-word">scroll</span></div>
-</section>
+    <nav id="main-nav">
+        <a href="#" class="nav-logo">OBRA</a>
+        <div class="nav-links">
+            <a href="#philosophy" class="nav-link">Concepto</a>
+            <a href="#figures" class="nav-link">Colección</a>
+            <a href="#gallery" class="nav-link">Espacios</a>
+            <button class="nav-btn">Tienda</button>
+        </div>
+    </nav>
 
-<section id="figures">
-  <div class="figures-header">
-    <div><p class="section-tag">La pieza</p><h2 class="figures-h2">The Figure</h2></div>
-    <p class="figures-sub">Portasahumerios de cerámica.<br>Stock limitado.</p>
-  </div>
-  <div class="figures-grid">
-    <a href="producto-gris.html" class="figure-card">
-      <img src="cuerpo%20completo.png" class="figure-card-img" alt="Gris">
-      <div class="figure-card-overlay"></div>
-      <div class="figure-card-info">
-        <p class="figure-card-name">The Figure — Gris</p>
-        <div class="figure-card-price"><span style="color:#c8b99a">$89.000</span><span style="font-size:9px">Ver detalles →</span></div>
-      </div>
-    </a>
-    <a href="producto-blanco.html" class="figure-card">
-      <img src="completo blanco.png" class="figure-card-img" alt="Blanco">
-      <div class="figure-card-overlay"></div>
-      <div class="figure-card-info">
-        <p class="figure-card-name">The Figure — Blanco</p>
-        <div class="figure-card-price"><span style="color:#c8b99a">$89.000</span><span style="font-size:9px">Ver detalles →</span></div>
-      </div>
-    </a>
-    <div class="figure-card">
-        <div id="smoke-negro" style="height:100%; position:relative;"></div>
-        <div class="figure-card-overlay" style="background:rgba(0,0,0,0.4)"></div>
-        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; letter-spacing:4px; font-size:10px">PRONTO</div>
-    </div>
-  </div>
-</section>
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-light"></div>
+        <div class="hero-content">
+            <span class="hero-tag">Edición Inaugural</span>
+            <h1 class="hero-title">Una pieza<br><em>para tu espacio.</em></h1>
+            <p class="hero-desc">Exploramos la intersección entre la forma orgánica y el minimalismo arquitectónico. Objetos que no solo ocupan lugar, sino que definen la atmósfera.</p>
+            <a href="#figures" class="hero-cta">Explorar la pieza <span>→</span></a>
+        </div>
 
-<section id="philosophy">
-  <div><p class="section-tag">Concepto</p><h2 class="phil-h2">Un objeto no ocupa <em>espacio.</em> Lo define.</h2></div>
-  <div><p class="phil-body">Un gesto silencioso de identidad artesanal.</p></div>
-</section>
+        <div class="scroll-indicator">
+            <div class="scroll-line-box"></div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
 
-<section id="gallery">
-  <div class="gallery-grid-custom">
-    <div class="gallery-left"><img src="planta.png" alt="Espacio 1"></div>
-    <div class="gallery-left"><img src="de noche.png" alt="Espacio 2"></div>
-    <div class="gallery-banner"><img src="banner.png" alt="Banner"></div>
-  </div>
-</section>
+    <section id="philosophy">
+        <div class="phil-left">
+            <p class="phil-label">Nuestra Esencia</p>
+            <h2 class="phil-title">Buscamos el <em>silencio</em> visual a través de la materia.</h2>
+        </div>
+        <div class="phil-content">
+            <p class="phil-text">Cada pieza de OBRA es el resultado de una búsqueda por la simplicidad absoluta. No diseñamos decoración, creamos puntos de anclaje para la contemplación en el hogar moderno.</p>
+            <p class="phil-text">Utilizamos procesos artesanales que respetan la imperfección natural, logrando que cada objeto sea único, con su propia sombra y carácter.</p>
+        </div>
+    </section>
 
-<footer>
-  <div class="footer-logo">OBRA</div>
-  <p style="font-size:10px; opacity:0.3">© 2025 Obra Studio · Buenos Aires</p>
-</footer>
+    <section id="figures">
+        <div class="section-header">
+            <div>
+                <p class="phil-label" style="margin-bottom: 16px;">Colección 01</p>
+                <h2 class="figures-h2" style="font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;">The Figure</h2>
+            </div>
+            <p style="font-size: 12px; color: rgba(200, 185, 154, 0.4); max-width: 240px; text-align: right; line-height: 1.6;">Portasahumerios esculpidos en cerámica de alta temperatura.</p>
+        </div>
 
-<script>
-  // Script para Nav y Humo
-  window.addEventListener('scroll', () => {
-    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
-  });
+        <div class="figures-grid">
+            <a href="#" class="figure-card">
+                <div class="figure-smoke-container" id="smoke-1"></div>
+                <div class="figure-img-container">
+                    <img src="cuerpo%20completo.png" alt="The Figure Gris">
+                </div>
+                <div class="figure-info">
+                    <span class="figure-category">Edición Limitada</span>
+                    <h3 class="figure-name">The Figure — Gris Ceniza</h3>
+                    <div class="figure-price">
+                        <span>$89.000</span>
+                        <span style="font-size: 10px; letter-spacing: 0.1em;">Ver detalles →</span>
+                    </div>
+                </div>
+            </a>
 
-  function createSmoke(containerId, color) {
-    const container = document.getElementById(containerId);
-    if(!container) return;
-    for (let i = 0; i < 7; i++) {
-      const p = document.createElement('div');
-      p.className = 'smoke-particle';
-      p.style.cssText = `left:50%; bottom:${i*20}px; width:20px; height:20px; background:${color}; animation-delay:${i*0.8}s;`;
-      container.appendChild(p);
-    }
-  }
-  createSmoke('smoke-negro', 'rgba(200,185,160,0.1)');
-</script>
+            <a href="#" class="figure-card">
+                <div class="figure-smoke-container" id="smoke-2"></div>
+                <div class="figure-img-container">
+                    <img src="completo blanco.png" alt="The Figure Blanco">
+                </div>
+                <div class="figure-info">
+                    <span class="figure-category">Edición Limitada</span>
+                    <h3 class="figure-name">The Figure — Blanco Crudo</h3>
+                    <div class="figure-price">
+                        <span>$89.000</span>
+                        <span style="font-size: 10px; letter-spacing: 0.1em;">Ver detalles →</span>
+                    </div>
+                </div>
+            </a>
+
+            <div class="figure-card" style="opacity: 0.8;">
+                <div class="figure-img-container" style="background: radial-gradient(circle, #1a1a1a 0%, #0d0c0b 100%);">
+                    <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.3em; color: rgba(200, 185, 154, 0.3);">PRÓXIMAMENTE</div>
+                </div>
+                <div class="figure-info">
+                    <span class="figure-category">Colección 01</span>
+                    <h3 class="figure-name">The Figure — Negro Mate</h3>
+                    <div class="figure-price">
+                        <span>Lanzamiento Junio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item large">
+                <img src="planta.png" alt="Atmósfera Obra">
+            </div>
+            <div class="gallery-item">
+                <img src="de noche.png" alt="Detalle de luz">
+            </div>
+            <div class="gallery-item">
+                <img src="banner.png" alt="Texturas">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo-box">
+                <div class="logo">OBRA</div>
+                <p style="font-size: 12px; color: rgba(240, 237, 232, 0.3); max-width: 200px; line-height: 1.8;">Objetos curados para espacios que respiran.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Colección</h4>
+                    <ul>
+                        <li><a href="#">The Figure</a></li>
+                        <li><a href="#">Próximos lanzamientos</a></li>
+                        <li><a href="#">Cuidado de piezas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Estudio</h4>
+                    <ul>
+                        <li><a href="#">Concepto</a></li>
+                        <li><a href="#">Procesos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 OBRA STUDIO. BUENOS AIRES, ARGENTINA.</p>
+            <div class="social-links">
+                <a href="#" class="nav-link" style="font-size: 8px;">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // NAVIGATION SCROLL EFFECT
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // SMOKE EFFECT SYSTEM
+        function createSmoke(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'smoke-particle';
+                
+                // Variación aleatoria
+                const size = Math.random() * 20 + 10;
+                const left = Math.random() * 40 + 30; // Centrado relativo
+                const duration = Math.random() * 3 + 4;
+                const delay = Math.random() * 2;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+                
+                // Limpiar DOM
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000 + 2000);
+            }, 800);
+        }
+
+        // Inicializar humo en las tarjetas de producto
+        window.addEventListener('DOMContentLoaded', () => {
+            createSmoke('smoke-1');
+            createSmoke('smoke-2');
+        });
+    </script>
 </body>
 </html>
